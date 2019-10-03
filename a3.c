@@ -265,14 +265,14 @@ If one does exist print off its location.
 int buildaset(set *s1){
     
     void addtoset(int elm, set *s1);
-    int count = 0;
+    int countelm = 0;
     int counter = 0;
     int temp;
     
-    scanf("%d", &count);
+    scanf("%d", &countelm);
     
-    if (count > -1) {
-        while (counter < count){
+    if (countelm > -1) {
+        while (counter < countelm){
             scanf("%d", &temp);
             addtoset(temp, s1);
             counter++;
