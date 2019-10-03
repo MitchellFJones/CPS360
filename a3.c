@@ -1,3 +1,10 @@
+/*
+Name: Mitchell Jones & Brandon Stolz        Class: CPS 360
+Assignment: 3
+Due: Oct 4, 2019                                           
+Points: 10
+*/
+
 #define SIZE 32         /* 32*8 elements in a set */
 struct set{
         char data[SIZE];
