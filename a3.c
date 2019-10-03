@@ -37,6 +37,15 @@ int main(void)
    
    exit(0);
 }
+/*
+Problem: Build two sets using struct set, and run set operations.
+
+Solution: Create two sets then intialize them. Using buildaset() values
+will be stored in our set using scanf, however if buildaset() returns a zero
+then print the standard error for build failure, and clear the sets. On success,
+we print out our sets using printaset(), and dosetops() will run union, intersect,
+and difference. Clear our sets after dosetops(), and repeat proccess.
+*/
 
 
 
@@ -286,3 +295,9 @@ and increase the counter (number of bits in set) by one.
 void clearaset(set *s1) {  
     initaset(s1);
 }
+/*
+Problem: Clear all the data from a set.
+
+Solution: Use function as wrapper, pass in value of a set and 
+use initaset() to intitalize the values back to zero.
+*/
