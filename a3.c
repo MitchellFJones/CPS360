@@ -28,7 +28,6 @@ int main(void)
     
    set seta, setb;
    int i;
-   /* prototypes for the functions called by main go here */
    initaset(&seta); initaset(&setb);
  
    for(i = 0; i < 4; i++) {
