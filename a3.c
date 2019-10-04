@@ -3,6 +3,25 @@ Name: Mitchell Jones & Brandon Stolz        Class: CPS 360
 Assignment: 3
 Due: Oct 4, 2019                                           
 Points: 10
+
+Problem: Write a program that will use a user defined structure called a set. In this set
+is an array of characters which is defined by SIZE (32). Also in a set is a int called count
+which relays the number of bits in that set. This Bitmap will contain various numbers, which are placed in
+the bitmap using a 1 or 0 in the slot to which that number reperesents. Creating two sets with different numbers
+the program finds the union, difference, and intersect of these sets, displays them, and clears the number from the sets.
+
+Solution: Using the defined struct set requires initialization of our sets, using modules to build our sets
+the user can enter in the values of a set manually or using a text file at runtime. The first number entered is the
+number of numbers being added that set, while the following numbers are the values being entered in the set. Bitwise
+operations allow for speedy computations to be made about whether or not a number is in a set which is the basis for
+dosetops() which calculates our union etc; Simply put, when a number has to be entered, place a 1 in that slot of the set.
+Then to check if a number is there, find out if a 1 or 0 is there in the bitmap.
+
+Data-Structure used: Struct has a one dimensional array of chars called data, and a number indicating the count of 
+elements in the set.
+
+Errors-Handled: The buildaset() module will return a 0 if any sort of build failure occurs while building
+the set.
 */
 
 #define SIZE 32         /* 32*8 elements in a set */
@@ -16,6 +35,17 @@ typedef struct set set; /* set type - user defined */
 #include <stdlib.h>
 #include <stdio.h>
 #define SIZE 32
+
+/*
+Problem: Build two sets using struct set, and run set operations.
+
+Solution: Create two sets then intialize them. Using buildaset() values
+will be stored in our set using scanf, however if buildaset() returns a zero
+then print the standard error for build failure, and clear the sets. On success,
+we print out our sets using printaset(), and dosetops() will run union, intersect,
+and difference. Clear our sets after dosetops(), and repeat proccess.
+*/
+
 
 int main(void)
 {
@@ -43,17 +73,13 @@ int main(void)
    
    exit(0);
 }
+
 /*
-Problem: Build two sets using struct set, and run set operations.
+Problem: Initialize a set, clearing values of count.
 
-Solution: Create two sets then intialize them. Using buildaset() values
-will be stored in our set using scanf, however if buildaset() returns a zero
-then print the standard error for build failure, and clear the sets. On success,
-we print out our sets using printaset(), and dosetops() will run union, intersect,
-and difference. Clear our sets after dosetops(), and repeat proccess.
+Solution: Pass in the value of a set, makes its count zero. 
+Iterate through the set using SIZE, makinng each value zero.
 */
-
-
 
 void initaset(set *s1){       
     int i;
@@ -64,10 +90,12 @@ void initaset(set *s1){
 }
 
 /*
-Problem: Initialize a set, clearing values of count.
+Problem: Add a value to a set (int elm), if that value is already in the set don't add it again.
 
-Solution: Pass in the value of a set, makes its count zero. 
-Iterate through the set using SIZE, makinng each value zero.
+Solution: Using isinset, check if elm is already in set, if so return. I is elm right shifted
+by 3 (Byte location), j elm & 7 (Bit location). S1's data is equal to the value byte location and
+bit location. increase s1's count by one.
+
 */
 
 void addtoset(int elm, set *s1) {
@@ -82,13 +110,13 @@ void addtoset(int elm, set *s1) {
 }
 
 /*
-Problem: Add a value to a set (int elm), if that value is already in the set don't add it again.
+Problem: Search if a value (int elm) is in a set, return 1 if found.
 
-Solution: Using isinset, check if elm is already in set, if so return. I is elm right shifted
-by 3 (Byte location), j elm & 7 (Bit location). S1's data is equal to the value byte location and
-bit location. increase s1's count by one.
+Solution: Make i and j your byte and bit location, if there is a value found
+at s1's data of i and j, elm is in the set. if not return zero.
 
 */
+
 
 int isinset(int elm, set s1){    
     
@@ -100,13 +128,13 @@ int isinset(int elm, set s1){
             
 }
 /*
-Problem: Search if a value (int elm) is in a set, return 1 if found.
+Problem: Find the union of two sets and display them.
 
-Solution: Make i and j your byte and bit location, if there is a value found
-at s1's data of i and j, elm is in the set. if not return zero.
-
+Solution: Pass in value of blank third set, iterate through
+the byte and bit locations of both sets. If there is a value at some 
+location add that value to our new set (s3). After doing for both sets use 
+printaset() to display s3, then clear s3 using clearaset().
 */
-
 
 void setunion(set s1, set s2, set *s3) {
     void addtoset(int elm, set *s1);
@@ -132,16 +160,15 @@ void setunion(set s1, set s2, set *s3) {
     printaset("Set Union: ", *s3);
     clearaset(s3);
 }
+
 /*
-Problem: Find the union of two sets and display them.
+Problem: Find the intersect of two sets and display them.
 
-Solution: Pass in value of blank third set, iterate through
-the byte and bit locations of both sets. If there is a value at some 
-location add that value to our new set (s3). After doing for both sets use 
-printaset() to display s3, then clear s3 using clearaset().
-
+Solution: Pass in value of blank third set. Iterate through the byte and bit locations of s1. 
+At each location use isinset(), checking if that value is in s2.
+If it is, add it to our blank set s3. Display s3 using printaset(),
+clear s3 using clearaset().
 */
-
 void setintersect(set s1, set s2, set *s3){
     void addtoset(int elm, set *s1);
     void printaset(char *label, set s1);
@@ -166,16 +193,16 @@ void setintersect(set s1, set s2, set *s3){
     
 }
 
-/*
-Problem: Find the intersect of two sets and display them.
 
-Solution: Pass in value of blank third set. Iterate through the byte and bit locations of s1. 
-At each location use isinset(), checking if that value is in s2.
-If it is, add it to our blank set s3. Display s3 using printaset(),
-clear s3 using clearaset().
+/*
+Problem: Find the difference set of s1 on s2, and s2 on s1.
+
+Solution: Pass in value of blank third set. Iterate through byte and
+bit locations of s1, using isinset() to check if that value is in s2.
+If it is not, add that value to s3. Print s3 using printaset(), clear s3
+using clearaset(). Repeat process by iterating through s2 on s1.
 
 */
-
 
 void setdiff(set s1, set s2, set *s3){
     void addtoset(int elm, set *s1);
@@ -210,14 +237,12 @@ void setdiff(set s1, set s2, set *s3){
     printaset("B Difference A: ", *s3);
     clearaset(s3);
 }
+
 /*
-Problem: Find the difference set of s1 on s2, and s2 on s1.
+Problem: Run operations that find union, intersect, and differnce of two sets.
 
-Solution: Pass in value of blank third set. Iterate through byte and
-bit locations of s1, using isinset() to check if that value is in s2.
-If it is not, add that value to s3. Print s3 using printaset(), clear s3
-using clearaset(). Repeat process by iterating through s2 on s1.
-
+Solution: Create a new set called s3 and initialize it. Pass the address of s3 into
+setunion(), setintersect(), and setdiff() along with the two sets being compared.
 */
 
 void dosetops(set seta, set setb){
@@ -232,11 +257,13 @@ void dosetops(set seta, set setb){
     setintersect(seta, setb, &s3);
     setdiff(seta, setb, &s3);
 }
-/*
-Problem: Run operations that find union, intersect, and differnce of two sets.
 
-Solution: Create a new set called s3 and initialize it. Pass the address of s3 into
-setunion(), setintersect(), and setdiff() along with the two sets being compared.
+/*
+Problem: Print the values of a set.
+
+Solution: Check if the set to print is empty, if it is display Empty Set.
+Iterate through the byte and bit locations of our set, checking if a value exists.
+If one does exist print off its location.
 */
 
 void printaset(char *label, set s1){
@@ -260,11 +287,12 @@ void printaset(char *label, set s1){
     
 }
 /*
-Problem: Print the values of a set.
+Problem: Build at set by adding in values using scanf, return one on success.
 
-Solution: Check if the set to print is empty, if it is display Empty Set.
-Iterate through the byte and bit locations of our set, checking if a value exists.
-If one does exist print off its location.
+Solution: Scan the number of values being entered in a set (count), if count is
+a negative number return zero. While the number of bits in the set is less than 
+the number we want to add scan the value of the number we are adding. Use addtoset(),
+and increase the counter (number of bits in set) by one.
 
 */
 
@@ -288,22 +316,14 @@ int buildaset(set *s1){
     
     return 0;
 }
-
-/*
-Problem: Build at set by adding in values using scanf, return one on success.
-
-Solution: Scan the number of values being entered in a set (count), if count is
-a negative number return zero. While the number of bits in the set is less than 
-the number we want to add scan the value of the number we are adding. Use addtoset(),
-and increase the counter (number of bits in set) by one.
-
-*/
-void clearaset(set *s1) {  
-    initaset(s1);
-}
 /*
 Problem: Clear all the data from a set.
 
 Solution: Use function as wrapper, pass in value of a set and 
 use initaset() to intitalize the values back to zero.
 */
+
+
+void clearaset(set *s1) {  
+    initaset(s1);
+}
