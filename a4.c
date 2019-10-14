@@ -132,6 +132,7 @@ void mux2by1(int a, int b, int *yout){
 Solution:*/
 
 void mux4by1(int a, int b, int *yout){
+  
     
 }
 
