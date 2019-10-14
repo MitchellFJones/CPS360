@@ -118,13 +118,13 @@ Solution:*/
 
 void mux2by1(int a, int b, int *yout){
     
-   int i1, i0, s;
+   int i2, i1, i0;
     
    i0 = a & 1;
    i1 = (a >> 1) & 1;
-   s = b & 1;
+   i2 = b & 1;
 
-   *yout = (i0 & (s ^ 1)) | (i1 & s);
+   *yout = (i0 & (i2 ^ 1)) | (i1 & i2);
 }
 
 /*Problem:
