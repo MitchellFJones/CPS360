@@ -15,7 +15,9 @@ Errors-Handled:
 
 #include <stdio.h>
 #include <stdlib.h>
-/**/
+/*Problem:
+
+Solution:*/
 
 int main(int argc, char *argv[]){
     
@@ -24,14 +26,18 @@ int main(int argc, char *argv[]){
     exit (0);
 }
 
-/**/
+/*Problem:
+
+Solution:*/
 
 void usage(char *progname){
     
     fprintf(stderr, "./%s <arg-a> <arg-b> <arg-c>\n", progname); exit(1);
 }
 
-/**/
+/*Problem:
+
+Solution:*/
 
 void halfaddr(int a, int b, int *sum, int *outcary){
     
@@ -39,7 +45,9 @@ void halfaddr(int a, int b, int *sum, int *outcary){
     *outcary = (a & 1) & (b & 1);
 }
 
-/**/
+/*Problem: 
+
+Soultion:*/
 
 void fulladdr(int a, int b, int incary, int *sum, int *outcary){
     
@@ -47,7 +55,9 @@ void fulladdr(int a, int b, int incary, int *sum, int *outcary){
     *outcary = (a & b) | (incary & (a | b));
 }
 
-/**/
+/*Problem:
+
+Solution:*/
 
 void rcadd4(int a, int b, int incary, int *sum, int *outcary){
     
@@ -63,13 +73,17 @@ void rcadd4(int a, int b, int incary, int *sum, int *outcary){
     *sum = (s3 << 3) | (s2 << 2) | (s1 << 1) | s0;
 }
 
-/**/
+/*Problem:
+
+Solution:*/
 
 void lacadd4(int a, int b, int incary, int *sum, int *outcary){
     
 }
 
-/**/
+/*Problem:
+
+Solution:*/
 
 void evenparity3gen(int a, int *paritybit){
     
@@ -82,7 +96,9 @@ void evenparity3gen(int a, int *paritybit){
     *checkbit = (b2 ^ b1) | b0;
 }
 
-/**/
+/*Problem:
+
+Solution:*/
 
 void oddparity4chk(int a, int *checkbit){
     
@@ -96,19 +112,32 @@ void oddparity4chk(int a, int *checkbit){
     *checkbit = ((b3 ^ b2) ^ (b1 ^ b0)) ^ 1;
 }
 
-/**/
+/*Problem:
+
+Solution:*/
 
 void mux2by1(int a, int b, int *yout){
     
+   int i1, i0, s;
+    
+   i0 = a & 1;
+   i1 = (a >> 1) & 1;
+   s = b & 1;
+
+   *yout = (i0 & (s ^ 1)) | (i1 & s);
 }
 
-/**/
+/*Problem:
+
+Solution:*/
 
 void mux4by1(int a, int b, int *yout){
     
 }
 
-/**/
+/*Problem:
+
+Solution:*/
 
 void printresults(char *label, int a){
     
