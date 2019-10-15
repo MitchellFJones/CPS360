@@ -7,7 +7,7 @@ Points: 10
 Problem: Using the C Programming Language create a program that will simulate correctly the operations of
 a half adder, a full adder, a ripple-carry adder, a look-ahead-carry adder, an even parity-bit generator, an 
 odd parity-bit checker, a two by one multiplexer, and a four by one multiplexer. Do this using no arithmetic operators,
-no control-flow constructs, and no atoi() or strtol() functions. The purpose is to correctly use boolean logic circuits
+no control-flow constructs, and no atoi() functions. The purpose is to correctly use boolean logic circuits
 in the realm of the C language. Using if statments (aside from checking the number of arguments being passed in for
 standard error purposes) is not allowed, the goal is to use the boolean logic within our circuits to implement the 
 desired logic.
