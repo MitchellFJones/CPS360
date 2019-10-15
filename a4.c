@@ -142,24 +142,6 @@ void rcadd4(int a, int b, int incary, int *sum, int *outcary){
     *sum = (s3 << 3) | (s2 << 2) | (s1 << 1) | s0;
 }
 
-
-/*Problem: Generate even parity bit for lower order 3 bits of a value.
-
-Solution: Create 3 variables that represent the first 3 bits of the value.
-The even partiy bit will simply be the exclusive OR of bit-2 and bit-1, OR if bit-0
-is present. Creating an even parity bit generator.*/
-
-void evenparity3gen(int a, int *paritybit){
-    
-    int b2, b1, b0;
-    
-    b2 = (a >> 2) & 1;
-    b1 = (a >> 1) & 1;
-    b0 = (a & 1);
-    
-    *paritybit = (b2 ^ b1) | b0;
-}
-
 /*Problem: Find the sume of the lower order 4 bits of two numbers using the logic
 of a look ahead.
 
@@ -189,6 +171,23 @@ void lacadd4(int a, int b, int incary, int *sum, int *outcary){
     fulladdr(a0, b0, c2, s3, outcary);
 
     *sum = (s3 << 3) | (s2 << 2) | (s1 << 1) | s0;
+}
+
+/*Problem: Generate even parity bit for lower order 3 bits of a value.
+
+Solution: Create 3 variables that represent the first 3 bits of the value.
+The even partiy bit will simply be the exclusive OR of bit-2 and bit-1, OR if bit-0
+is present. Creating an even parity bit generator.*/
+
+void evenparity3gen(int a, int *paritybit){
+    
+    int b2, b1, b0;
+    
+    b2 = (a >> 2) & 1;
+    b1 = (a >> 1) & 1;
+    b0 = (a & 1);
+    
+    *paritybit = (b2 ^ b1) | b0;
 }
 
 /*Problem: Checks odd parity of lower order 4 bits of a value.
