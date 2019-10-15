@@ -52,7 +52,7 @@ int main(int argc, char *argv[]){
     int a = strtol(argv[1], NULL, 16), b = strtol(argv[2], NULL, 16), c = strtol(argv[3], NULL, 16), 
     out, sum, outcary, *o = &out; *s = &sum, *co = &outcary;
 
-    if(argc < 4) usage(argv[0]);
+    if(argc != 4) usage(argv[0]);
     
     printf("%s\n", "halfadder:");
     halfaddr(a, b, s, co);
