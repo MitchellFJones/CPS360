@@ -142,13 +142,6 @@ void rcadd4(int a, int b, int incary, int *sum, int *outcary){
     *sum = (s3 << 3) | (s2 << 2) | (s1 << 1) | s0;
 }
 
-/*Problem:
-
-Solution:*/
-
-void lacadd4(int a, int b, int incary, int *sum, int *outcary){
-    
-}
 
 /*Problem: Generate even parity bit for lower order 3 bits of a value.
 
@@ -165,6 +158,37 @@ void evenparity3gen(int a, int *paritybit){
     b0 = (a & 1);
     
     *paritybit = (b2 ^ b1) | b0;
+}
+
+/*Problem: Find the sume of the lower order 4 bits of two numbers using the logic
+of a look ahead.
+
+Solution: Create the values of the bits for both numbers, the sums, and for the look
+ahead store the values for the carry out/carry in (the c variables). After assigning 
+the bit values to their variables place the values inside the fulladdr function. The only
+difference is the fact that this function stores the value of the carry out.*/
+
+void lacadd4(int a, int b, int incary, int *sum, int *outcary){
+    
+    int s3, s2, s1, s0;
+    
+    int *s3p = &s3, *s2p = &s2, *s1p = &s1, *s0p = &s0;
+
+    int a0 = (a & 1), a1 = ((a >> 1) & 1), a2 = ((a >> 2) & 1), a3 = ((a >> 3) & 1),
+    b0 = (b & 1), b1 = ((b >> 1) & 1), b2 = ((b >> 1) & 1), b3 = ((b >> 3) & 1);
+
+    int c0 = (a0 & b0) | ((a0 ^ b0) & incary);
+    int c1 = (a1 & b1) | ((a1 ^ b1) & c0);
+    int c2 = (a2 & b2) | ((a1 ^ b2) & c1);
+
+    *outcary = (a3 & b3) | ((a3 ^ b3) & c2);
+
+    fulladdr(a0, b0, incary, s0, outcary);
+    fulladdr(a1, b1, c0, s1, outcary);
+    fulladdr(a2, b2, c1, s2, outcary);
+    fulladdr(a0, b0, c2, s3, outcary);
+
+    *sum = (s3 << 3) | (s2 << 2) | (s1 << 1) | s0;
 }
 
 /*Problem: Checks odd parity of lower order 4 bits of a value.
