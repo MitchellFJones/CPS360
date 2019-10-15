@@ -14,7 +14,7 @@ desired logic.
 
 Solution: Following the outline of the program, creating funtions within this program is not hard.
 Simply convert the boolean logic of a circuit to direct variables in C. Using the bitwise operators of C
-(&, |, ̃, ^, >>, <<) we can iterate, compare, negate, add, and even compare through any number given using it's binary.
+(&, |, ̃, ^, >>, <<) we can iterate, combine, negate, add, and even compare through any number given using it's binary.
 Every circuit in this program requires different logic, and in turn uses different bitwise operators. Specfic circuits
 in this program use each other. The Ripple-Carry Adder for example takes the operation given in the fulladdr function and applies
 it four different times, using a different value for the sum each time. That implementation is very similar to that in the real world.
